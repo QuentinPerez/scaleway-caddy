@@ -6,7 +6,7 @@
 
 Scripts to build the official Caddy image on Scaleway
 
-This image is built using [Image Tools](https://github.com/scaleway/image-tools) and depends on the official [Ubuntu](https://github.com/scaleway/image-ubuntu) image.
+This image is built using [Image Tools](https://github.com/scaleway/image-tools) and depends on the official [Golang](https://github.com/scaleway-community/scaleway-golang) image.
 
 [![Caddy](https://caddyserver.com/resources/images/caddy-boxed.png)](https://caddyserver.com)
 
