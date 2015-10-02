@@ -2,23 +2,26 @@
 FROM scaleway/golang:latest
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
+
 # Prepare rootfs for image-builder
 RUN /usr/local/sbin/builder-enter
 
 
-ENV CADDY_VERSION v0.7.6
+# Install Caddy
+ENV CADDY_VERSION=0.7.6
+RUN go get -tags="v$CADDY_VERSION" github.com/mholt/caddy \
+ && useradd -M caddy || true \
+ && echo "session required pam_limits.so" >> /etc/pam.d/su
 
-RUN go get -tags="$CADDY_VERSION" github.com/mholt/caddy
 
-RUN useradd -M caddy || true
-RUN mkdir -p /var/www/caddy/
-RUN echo "Hello from caddy" > /var/www/caddy/index.html
-RUN echo "caddy                hard    nofile          4096" > /etc/security/limits.d/90-nofile.conf
-RUN echo "caddy                soft    nofile          4096" >> /etc/security/limits.d/90-nofile.conf
-RUN echo "session required pam_limits.so" >> /etc/pam.d/su
-
+# Patch rootfs
 ADD patches/etc/ /etc
+ADD patches/var/ /var
+
+
+# Enable Caddy service
 RUN update-rc.d caddy defaults
+
 
 # Clean rootfs from image-builder
 RUN /usr/local/sbin/builder-leave
