@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cat << EOF
+
+Copy your website files in /var/www/caddy/
+You can access to your website at this URL http://$(oc-metadata --cached PUBLIC_IP_ADDRESS):2015
+
+EOF
