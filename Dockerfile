@@ -1,5 +1,5 @@
 ## -*- docker-image-name: "scaleway/caddy:latest" -*-
-FROM scaleway/golang:latest
+FROM scaleway/golang:1.5.2
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
 
